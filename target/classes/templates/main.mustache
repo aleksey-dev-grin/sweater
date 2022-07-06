@@ -5,6 +5,39 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<div>{{ some }}</div>
+<div>
+    <div>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <input type="submit" value="Sign out"/>
+        </form>
+    </div>
+    <br />
+    <div>
+        <form method="post">
+            <input type="text" name="text" placeholder="Text" />
+            <input type="text" name="tag" placeholder="Tag" />
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <button type="submit">Add message</button>
+        </form>
+    </div>
+    <br />
+    <div>
+        <form method="post" action="filter">
+            <input type="text" name="filter" placeholder="filter" />
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+    <br />
+    <div>Message list:</div>
+    {{#messages}}
+        <div>
+            <b>{{id}}</b>
+            <span>{{text}}</span>
+            <i>{{tag}}</i>
+        </div>
+    {{/messages}}
+</div>
 </body>
 </html>
